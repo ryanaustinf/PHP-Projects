@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Insert title here</title>
+		<link rel="stylesheet" href="external.css" />
+		<script src="jquery-2.1.1.js"></script>
+		<script src="external.js"></script>
+		<style>
+			.rightRow {
+				text-align:right;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<img src="Pikachu.jpg" />
+			Hello World!
+			<img src="Pikachu.jpg" />
+		</header>
+		<div id="mainContent">
+			<div id="sidebar">
+				<ul>
+					<li><a href="http://localhost:8080/LSD" onClick="alert('SURPRISE!');">LSD</a></li>
+					<li><a href="#">Stanley</a></li>
+					<li><a href="#">Boobs</a></li>
+					<li><a href="about.html">About Me</a></li>
+					<li><a href="yomamma.php">Comment Section</a></li>
+					<li><a href="smile.php">Smiles</a></li>
+					<li><a href="http://localhost:8080/The_Multimedia_Terminal/">MP</a></li>
+				</ul>
+			</div>
+			<div id="mainBody">
+				<form action="username.php" method="post">
+					<table>
+						<tr>
+							<td class="rightRow">Write your name here: </td>
+							<td><input type="text" name="username" required /></td>
+						</tr>
+						<tr>
+							<td class="rightRow">Password:</td>
+							<td><input type="password" name="password" required /></td>
+						</tr>
+					</table>
+					<input type="submit" />
+				</form> <br /><br />
+				<form action="smile.php" onsubmit="return checkNaN(this);">
+					Number of Smiles: <input type="text" name="n" id="smiles" required />
+					<input type="submit" />
+				</form><br /><br />
+				<form name="got" action="GOTPage.php">
+					<input type="text" value="" placeholder="Filter Characters" name="f" />
+					<input value="Search Characters" type="submit" />
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
