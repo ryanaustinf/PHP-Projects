@@ -51,6 +51,10 @@
 		
 		#content button {
 			position: relative;
+			background-color:#0C817B;
+			color:#AFF5AD;
+			border:none;
+			font-size:1.5em;
 			top:250px;
 			left:20%;
 		}
