@@ -18,6 +18,12 @@
 			margin:0px;
 		}
 		
+		#mainContent {
+			width:100%;
+			height:100%;
+			overflow-x:hidden;
+		}
+		
 		div, p{
 			margin:0px;
 			color:#1D1E1E;
@@ -33,7 +39,7 @@
 			
 		.nav{
 			background-color:#F4B6AC;
-			width:90%;
+			width:100%;
 			height:15%;
 		}
 		
@@ -68,16 +74,15 @@
 		
 		#content{
 			background-color:#FFF7F3;
-			width:90%;
+			width:100%;
 			height:70%;
 		}
 		
 		#adddiv{
-			padding-top: 50px;
-			padding: 20px;
+			padding:5% 1% 1% 1% ;
 			color:white;
 			width:300px;
-			height:100%;
+			height:87.5%;
 			background-color:#EB4B55;
 			float:left;
 			/* position:absolute;
@@ -225,30 +230,32 @@
 		}
 	</script>
 </head>
-<body>
-	<!-- <form action="controller.php">
-		<input type="hidden" name="request" value="done" />
-		<input type="hidden" name="id" value="129" />
-		<input type="submit" />
-	</form>-->
-	<div id="adddiv">
-		Add Note : <br>
-		<form action="add" method="GET" onSubmit="return addNote();">
-			<input type="text" id="newNote" name="note" placeholder="Note"/><br>
-			<input type="submit" value="Add"/>
-		</form>
+<body>	
+	<div id="mainContent">
+		<!-- <form action="controller.php">
+			<input type="hidden" name="request" value="done" />
+			<input type="hidden" name="id" value="129" />
+			<input type="submit" />
+		</form>-->
+		<div id="adddiv">
+			Add Note : <br>
+			<form action="add" method="GET" onSubmit="return addNote();">
+				<input type="text" id="newNote" name="note" placeholder="Note"/><br>
+				<input type="submit" value="Add"/>
+			</form>
+		</div>
+		<div id="add">
+			<p>+</p>
+		</div>
+		
+		<div class="nav" id="up"></div>
+		
+		<div id="content">
+			<p><?php echo $note->getNote(); ?></p>
+			<button id='done'>Done</button>
+		</div>
+		
+		<div class="nav" id="down"></div>
 	</div>
-	<div id="add">
-		<p>+</p>
-	</div>
-	
-	<div class="nav" id="up"></div>
-	
-	<div id="content">
-		<p><?php echo $note->getNote(); ?></p>
-		<button id='done'>Done</button>
-	</div>
-	
-	<div class="nav" id="down"></div>
 </body>
 </html>

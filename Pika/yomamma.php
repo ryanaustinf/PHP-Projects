@@ -15,6 +15,15 @@
 				margin:auto;
 				display:block;
 			}
+			
+			form {
+				color:black;
+			}
+			
+			#mamma {
+				color:black;
+				text-transform:uppercase;
+			}
 		</style>
 		<script src="external.js"></script>
 		<script src="jquery-2.1.1.js"></script>
@@ -54,7 +63,7 @@
 			<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
 				Your comment: <input type="text" placeholder="Your Comment Here" name="c" />
 			</form><br />
-			<?php echo "\t\t\t".yoMamma($_SESSION['c']);?>
+			<div id="mamma"><?php echo "\t\t\t".yoMamma($_SESSION['c']);?></div>
 			<br /><br /><a href="/Pika">Back</a>
 		</div>
 	</body>
