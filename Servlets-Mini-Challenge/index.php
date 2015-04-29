@@ -1,15 +1,15 @@
 <?php 
 	session_start();
-	if( isset($_COOKIE['colors']) ) {
+	if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+		$_SESSION['bg'] = $_POST['bg'];
+		$_SESSION['pc'] = $_POST['pc'];
+		$_SESSION['fc'] = $_POST['fc'];
+		setcookie('colors',$_SESSION['bg'].",".$_SESSION['pc'].",".$_SESSION['fc'],time() + 86400,"/");
+	} elseif( isset($_COOKIE['colors']) ) {
 		$colors = str_getcsv($_COOKIE['colors']);
 		$_SESSION['bg'] = $colors[0];
 		$_SESSION['pc'] = $colors[1];
 		$_SESSION['fc'] = $colors[2];
-	} if( isset($_GET['bg'] ) && isset($_GET['pc'] ) && isset($_GET['fc'] ) ) {
-		$_SESSION['bg'] = $_GET['bg'];
-		$_SESSION['pc'] = $_GET['pc'];
-		$_SESSION['fc'] = $_GET['fc'];
-		setcookie('colors',$_SESSION['bg'].",".$_SESSION['pc'].",".$_SESSION['fc'],time() + 86400,"/");
 	} else {
 		$_SESSION['bg'] = "black";
 		$_SESSION['pc'] = "green";

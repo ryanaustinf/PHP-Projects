@@ -24,13 +24,16 @@
 	</head>
 	<body>
 		<?php 
-			$colors = array("black","white","red","yellow","green","blue"); 
+			$colors = array("black","white","red","yellow","green","blue"
+							,"aqua","fuchsia","gray","lime","maroon",
+							"navy","olive","purple","silver","teal");
+			sort($colors); 
 		?>
 		<div id="mainContent">
 			<?php 
-				$curr_colors = array( "bg"=>$_SESSION['bg'], "fc"=>$_SESSION['fc'], "fc"=>$_SESSION['pc'] );
+				$curr_colors = array( "bg"=>$_SESSION['bg'], "fc"=>$_SESSION['fc'], "pc"=>$_SESSION['pc'] );
 			?>
-			<form action="index.php">
+			<form action="index.php" method="post">
 				<p>Choose your preferred theme</p>
 				<table>
 					<tr>
