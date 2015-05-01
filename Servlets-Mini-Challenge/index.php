@@ -4,7 +4,8 @@
 		$_SESSION['bg'] = $_POST['bg'];
 		$_SESSION['pc'] = $_POST['pc'];
 		$_SESSION['fc'] = $_POST['fc'];
-		setcookie('colors',$_SESSION['bg'].",".$_SESSION['pc'].",".$_SESSION['fc'],time() + 86400,"/");
+		setcookie('colors',$_SESSION['bg'].",".$_SESSION['pc'].","
+					.$_SESSION['fc'],time() + 86400,"/");
 	} elseif( isset($_COOKIE['colors']) ) {
 		$colors = str_getcsv($_COOKIE['colors']);
 		$_SESSION['bg'] = $colors[0];
@@ -81,7 +82,8 @@
 			
 			And I can't stop 'til the whole world knows my name<br />
 			'Cause I was only born inside my dreams<br />
-			Until you die for me, as long as there is a light, my shadow's over you<br />
+			Until you die for me, as long as there is a light, 
+				my shadow's over you<br />
 			'Cause I am the opposite of amnesia<br />
 			And you're a cherry blossom<br />
 			You're about to bloom<br />

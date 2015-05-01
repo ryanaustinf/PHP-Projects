@@ -240,7 +240,8 @@
 		<div id="adddiv">
 			Add Note : <br>
 			<form action="add" method="GET" onSubmit="return addNote();">
-				<input type="text" id="newNote" name="note" placeholder="Note"/><br>
+				<input type="text" id="newNote" name="note" 
+					placeholder="Note"/><br>
 				<input type="submit" value="Add"/>
 			</form>
 		</div>

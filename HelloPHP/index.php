@@ -68,6 +68,60 @@
 			echo "\t\t<h4>Hello $text</h4>\n";
 			echo "\t\t<h5>Hello $text</h5>\n";
 			echo "\t\t<h6>Hello $text</h6>\n";
+			class Test {
+				private $var1;
+				private $var2;
+				private $var3;
+				
+				public function __construct($var1,$var2) {
+					$this->var1 = $var1;
+					$this->var2 = $var2;
+				}
+				
+				public function getVar1() {
+					return $this->var1;
+				}
+				
+				public function getVar2() {
+					return $this->var2;
+				}
+				
+				public function getVar3() {
+					return $this->var3;
+				}
+				
+				public function setVar1($var1) {
+					$this->var1 = $var1;
+				}
+				
+				public function setVar2($var2) {
+					$this->var2 = $var2;
+				}
+				
+				public function setVar3(Test $var3) {
+					$this->var3 = $var3;
+				}
+				
+				public function expose() {
+					$temp = get_object_vars($this);
+					$temp2 = $temp;
+					$temp = &$temp2;
+					$temp3 = $this->var3;
+					while( $temp2['var3'] != null ) {
+						$temp2['var3'] = $temp3->expose();
+						$temp2 = &$temp2['var3'];
+						$temp3 = $temp3->getVar3();
+					}
+					return $temp;
+				}
+			}
+			
+			$test = new Test(3,4);
+			$test->setVar3(new Test(5,6));
+			$test2 = $test->getVar3();
+			$test2->setVar3(new Test(7,8));
+			echo "<br/>";
+			echo json_encode($test->expose())."\n";
 		?>
 		<br />
 		
@@ -87,7 +141,8 @@
 			</table>
 		</form>
 		
-		<form id="hello" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+		<form id="hello" action="<?php echo $_SERVER['PHP_SELF'];?>" 
+			method="post">
 			<input type="text" class="name" name="name" />
 			<input type="hidden" id="num1" name="num1" />
 			<input type="hidden" id="num2" name="num2" />

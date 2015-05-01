@@ -57,11 +57,14 @@
 			<?php  
 				function yoMamma( $s ) {
 					$c = date("g:i A \on n/j/Y");
-					return ( ( $s == null || strlen($s) == 0 ) ?  "" : "As of ".$c.", your mother is a ".$s."!" );
+					return ( ( $s == null || strlen($s) == 0 ) ?  "" : "As of "
+								.$c.", your mother is a ".$s."!" );
 				}
 			?>
-			<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
-				Your comment: <input type="text" placeholder="Your Comment Here" name="c" />
+			<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" 
+				method="post">
+				Your comment: <input type="text" placeholder="Your Comment Here" 
+								name="c" />
 			</form><br />
 			<div id="mamma"><?php echo "\t\t\t".yoMamma($_SESSION['c']);?></div>
 			<br /><br /><a href="/Pika">Back</a>

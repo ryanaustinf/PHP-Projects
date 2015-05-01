@@ -2,10 +2,12 @@
 	require_once '../asoiaf.php';
 	
 	$filter = "%".$_GET['f']."%";
-	$query = "SELECT concat(firstname,' ', IFNULL(lastname,'')) AS Name, H.name AS house, title ". 
+	$query = "SELECT concat(firstname,' ', IFNULL(lastname,'')) AS Name, "
+				."H.name AS house, title ". 
 	   			"FROM characters, house H ".
 	   			"WHERE houseID = house ". 
-	   			( strlen($filter) == 2 ? "" : "AND (firstname LIKE ? OR lastname LIKE ? OR title LIKE ?) ").  
+	   			( strlen($filter) == 2 ? "" : "AND (firstname LIKE ? OR "
+	   					."lastname LIKE ? OR title LIKE ?) ").  
 	   			"ORDER BY 1";
 	$stmt = $conn->prepare($query);
 	@$stmt->bind_param("sss",$filter,$filter,$filter);

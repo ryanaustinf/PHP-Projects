@@ -31,7 +31,9 @@
 		?>
 		<div id="mainContent">
 			<?php 
-				$curr_colors = array( "bg"=>$_SESSION['bg'], "fc"=>$_SESSION['fc'], "pc"=>$_SESSION['pc'] );
+				$curr_colors = array( "bg"=>$_SESSION['bg'], 
+										"fc"=>$_SESSION['fc'], 
+										"pc"=>$_SESSION['pc'] );
 			?>
 			<form action="index.php" method="post">
 				<p>Choose your preferred theme</p>
@@ -42,7 +44,10 @@
 							<select name="bg">
 								<?php  
 									foreach( $colors as $s ) {
-										echo "\t\t\t\t\t\t\t\t<option value='$s'".($curr_colors["bg"] == $s ? "selected" : "").">$s</option>";
+										echo "\t\t\t\t\t\t\t\t<option value='$s'"
+												.($curr_colors["bg"] == $s 
+													? "selected" : "")
+												.">$s</option>";
 									}
 								?>
 							</select>
@@ -54,7 +59,11 @@
 							<select name="pc">
 								<?php  
 									foreach( $colors as $s ) {
-										echo "\t\t\t\t\t\t\t\t<option value='$s'".($curr_colors["pc"] == $s ? "selected" : "").">$s</option>";
+										echo "\t\t\t\t\t\t\t\t<option value"
+												."='$s'".($curr_colors["pc"] 
+															== $s ? "selected" 
+															: "")
+												.">$s</option>";
 									}
 								?>
 							</select>
@@ -66,7 +75,11 @@
 							<select name="fc">
 								<?php  
 									foreach( $colors as $s ) {
-										echo "\t\t\t\t\t\t\t\t<option value='$s'".($curr_colors["fc"] == $s ? "selected" : "").">$s</option>";
+										echo "\t\t\t\t\t\t\t\t<option value"
+												."='$s'".($curr_colors["fc"] 
+															== $s ? "selected" 
+															: "")
+												.">$s</option>";
 									}
 								?>
 							</select>

@@ -7,5 +7,7 @@
 		$str .= $key." = ".$attr."<br>";
 	} 
 	
-	echo "<br />Result: <br />$num1 + $num2 = $sum<br />$num1 - $num2 = ".($num1-$num2)."<br />$num1 * $num2 = ".$num1*$num2."<br/>$num1 / $num2 = ".$num1/$num2;
+	echo "<br />Result: <br />$num1 + $num2 = $sum<br />$num1 - $num2 = "
+			.($num1-$num2)."<br />$num1 * $num2 = ".$num1*$num2
+			."<br/>$num1 / $num2 = ".$num1/$num2;
 ?>

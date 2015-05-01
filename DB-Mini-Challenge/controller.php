@@ -71,12 +71,14 @@
 	
 	function getLastTodo() {
 		global $conn;
-		$query = "SELECT * FROM todo WHERE status='PENDING' ORDER BY todoid DESC LIMIT 1";
+		$query = "SELECT * FROM todo WHERE status='PENDING' ORDER BY todoid ".
+					"DESC LIMIT 1";
 		$result = $conn->query($query);
 		if( $result->num_rows > 0 ) {
 			$row = $result->fetch_assoc();
 			$note = new NoteBuilder();
-			return $note->todoid($row['toDoId'])->note($row['content'])->build();
+			return $note->todoid($row['toDoId'])->note($row['content'])
+						->build();
 		} else {
 			$note = new NoteBuilder();
 			return $note->build();			
@@ -102,7 +104,8 @@
 	
 	function getNextPendingToDo($id) {
 		global $conn;
-		$query = "SELECT todoid,content FROM todo WHERE status='PENDING' and todoid>? LIMIT 1;";
+		$query = "SELECT todoid,content FROM todo WHERE status='PENDING' and "
+					."todoid>? LIMIT 1;";
 		$stmt = $conn->prepare($query);
 		$stmt->bind_param("i",$id);
 		$stmt->bind_result($todoid,$content);
@@ -111,7 +114,8 @@
 			$note = new NoteBuilder();
 			return $note->todoid($todoid)->note($content)->build();
 		} else {
-			$query = "SELECT todoid,content FROM todo WHERE status='PENDING' and todoid<? LIMIT 1";
+			$query = "SELECT todoid,content FROM todo WHERE status='PENDING'"
+						." and todoid<? LIMIT 1";
 			$stmt = $conn->prepare($query);
 			$stmt->bind_param("i",$id);
 			$stmt->bind_result($todoid,$content);
@@ -129,7 +133,8 @@
 	function getToDo($id) {
 		global $conn;
 		
-		$query = "SELECT todoid, content FROM todo WHERE status='PENDING' and todoid = ?";
+		$query = "SELECT todoid, content FROM todo WHERE status='PENDING' and"
+					." todoid = ?";
 		$stmt = $conn->prepare($query);
 		$stmt->bind_param("i",$id);
 		$stmt->bind_result($todoid,$content);
@@ -145,7 +150,8 @@
 	function getNextToDo($id) {
 		global $conn;
 		
-		$query = "SELECT todoid, content FROM todo WHERE status='PENDING' and todoid>? LIMIT 1";
+		$query = "SELECT todoid, content FROM todo WHERE status='PENDING' and "
+					."todoid>? LIMIT 1";
 		$stmt = $conn->prepare($query);
 		$stmt->bind_param("i",$id);
 		$stmt->bind_result($todoid,$content);
@@ -154,7 +160,8 @@
 		if( $row = $stmt->fetch() ) {
 			return $note->todoid($todoid)->note($content)->build();
 		} else {
-			$query = "SELECT todoid, content FROM todo WHERE status='PENDING' and todoid<? ORDER BY todoid LIMIT 1;";
+			$query = "SELECT todoid, content FROM todo WHERE status='PENDING'"
+						." and todoid<? ORDER BY todoid LIMIT 1;";
 			$stmt = $conn->prepare($query);
 			$stmt->bind_param("i",$id);
 			$stmt->bind_result($todoid,$content);
@@ -170,7 +177,8 @@
 	function getPrevToDo($id) {
 		global $conn;
 		
-		$query = "SELECT todoid, content FROM todo WHERE status='PENDING' and todoid<? ORDER BY todoid DESC LIMIT 1;";
+		$query = "SELECT todoid, content FROM todo WHERE status='PENDING' "
+					."and todoid<? ORDER BY todoid DESC LIMIT 1;";
 		$stmt = $conn->prepare($query);
 		$stmt->bind_param("i",$id);
 		$stmt->bind_result($todoid,$content);
@@ -179,7 +187,8 @@
 		if( $row = $stmt->fetch() ) {
 			return $note->todoid($todoid)->note($content)->build();
 		} else {
-			$query = "SELECT todoid, content FROM todo WHERE status='PENDING' and todoid>? ORDER BY todoid DESC LIMIT 1;";
+			$query = "SELECT todoid, content FROM todo WHERE status='PENDING'"
+						." and todoid>? ORDER BY todoid DESC LIMIT 1;";
 			$stmt = $conn->prepare($query);
 			$stmt->bind_param("i",$id);
 			$stmt->bind_result($todoid,$content);

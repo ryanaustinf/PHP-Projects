@@ -42,7 +42,8 @@
 				}
 				echo "\t\t\t<ol>\n";
 				while( $count > 0 ) {
-					echo "\t\t\t\t<li style=\"display:inline\"><h1 style=\"display:inline\">:-D</h1></li>\n";
+					echo "\t\t\t\t<li style=\"display:inline\"><h1 style=\""
+							."display:inline\">:-D</h1></li>\n";
 					$count--;
 				}
 			?>
