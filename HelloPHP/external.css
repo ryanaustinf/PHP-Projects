@@ -1,0 +1,33 @@
+@CHARSET "ISO-8859-1";
+.highlight {
+	background-color:rgb(232,242,254);
+}
+
+p[id^="left"], p[id^="right"] {
+	margin:0;
+}
+
+#leftBox, #rightBox {
+	width:300px;
+	min-height: 200px;
+	border: #000 solid 1px;
+	padding:10px;
+}
+
+#listButtons {
+	text-align:center;
+	position:relative;
+	top:-160px;
+	left:345px;
+}
+
+#rightBox {
+	position:relative;
+	top:-322px;
+	left:400px;
+}
+
+#listButtons button{
+	display:block;
+	margin: 3px 0;
+}
