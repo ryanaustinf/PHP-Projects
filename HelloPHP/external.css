@@ -16,9 +16,10 @@ p[id^="left"], p[id^="right"] {
 
 #listButtons {
 	text-align:center;
+	width:40px;
 	position:relative;
 	top:-160px;
-	left:345px;
+	left:340px;
 }
 
 #rightBox {
@@ -28,6 +29,7 @@ p[id^="left"], p[id^="right"] {
 }
 
 #listButtons button{
+	width:35px;
 	display:block;
-	margin: 3px 0;
+	margin: 3px auto;
 }
