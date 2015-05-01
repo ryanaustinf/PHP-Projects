@@ -12,35 +12,7 @@ var rightSelected = [];
 var shift = false;
 var ctrl = false;
  
-function listListeners() {
-	$("p[id^='left']").click(function() {
-	var n = $(this).attr('id').substring(4);
-	console.log(n);
-	if( shift && leftSelected.length > 0 ) {
-		var leftBegin = leftSelected[0];
-		var i = n < leftBegin ? n : leftBegin;
-		var j = n < leftBegin ? leftBegin : n;
-		for( leftSelected = []; i <= j; i++ ) {
-			leftSelected.push( i );
-		}
-	} else if( ctrl && leftSelected.length > 0 ) {
-		var find = false;
-		for( var i in leftSelected ) {
-			if( leftSelected[i] == n ) {
-				find = true;
-				leftSelected.splice(i,1);
-				break;
-			}
-		}
-		if( !find ) {
-			leftSelected.push(n);
-			leftSelected.sort(function(a,b){return a-b;});
-		}
-	} else {
-		leftSelected = [];
-		leftSelected.push(n);
-	}
-
+function updateListHighlights() {
 	for( var i = 0; i < leftItems.length; i++ ) {
 		$("#left" + i).removeClass('highlight');
 	}
@@ -48,54 +20,90 @@ function listListeners() {
 	for( var i in leftSelected ) {
 		$("#left" + leftSelected[i]).addClass('highlight');
 	}
-});
-
-$("p[id^='right']").click(function() {
-	var n = $(this).attr('id').substring(5);
-	console.log(n);
-	if( shift && rightSelected.length > 0 ) {
-		var rightBegin = rightSelected[0];
-		var i = n < rightBegin ? n : rightBegin;
-		var j = n < rightBegin ? rightBegin : n;
-		for( rightSelected = []; i <= j; i++ ) {
-			rightSelected.push( i );
-		}
-	} else if( ctrl && rightSelected.length > 0 ) {
-		var find = false;
-		for( var i in rightSelected ) {
-			if( rightSelected[i] == n ) {
-				find = true;
-				rightSelected.splice(i,1);
-				break;
-			}
-		}
-		if( !find ) {
-			rightSelected.push(n);
-			rightSelected.sort(function(a,b){return a-b;});
-		}
-	} else {
-		rightSelected = [];
-		rightSelected.push(n);
-	}
-
+	
 	for( var i = 0; i < rightItems.length; i++ ) {
 		$("#right" + i).removeClass('highlight');
 	}
 
 	for( var i in rightSelected ) {
 		$("#right" + rightSelected[i]).addClass('highlight');
+	}
+}
+
+function listListeners() {
+	$("p[id^='left']").click(function() {
+		var n = $(this).attr('id').substring(4);
+		console.log(n);
+		if( shift && leftSelected.length > 0 ) {
+			var leftBegin = leftSelected[0];
+			var i = n < leftBegin ? n : leftBegin;
+			var j = n < leftBegin ? leftBegin : n;
+			for( leftSelected = []; i <= j; i++ ) {
+				leftSelected.push( i );
+			}
+		} else if( ctrl && leftSelected.length > 0 ) {
+			var find = false;
+			for( var i in leftSelected ) {
+				if( leftSelected[i] == n ) {
+					find = true;
+					leftSelected.splice(i,1);
+					break;
+				}
+			}
+			if( !find ) {
+				leftSelected.push(n);
+				leftSelected.sort(function(a,b){return a-b;});
+			}
+		} else {
+			leftSelected = [];
+			leftSelected.push(n);
 		}
+	
+		updateListHighlights();
+		updateButtons();
+	});
+	
+	$("p[id^='right']").click(function() {
+		var n = $(this).attr('id').substring(5);
+		console.log(n);
+		if( shift && rightSelected.length > 0 ) {
+			var rightBegin = rightSelected[0];
+			var i = n < rightBegin ? n : rightBegin;
+			var j = n < rightBegin ? rightBegin : n;
+			for( rightSelected = []; i <= j; i++ ) {
+				rightSelected.push( i );
+			}
+		} else if( ctrl && rightSelected.length > 0 ) {
+			var find = false;
+			for( var i in rightSelected ) {
+				if( rightSelected[i] == n ) {
+					find = true;
+					rightSelected.splice(i,1);
+					break;
+				}
+			}
+			if( !find ) {
+				rightSelected.push(n);
+				rightSelected.sort(function(a,b){return a-b;});
+			}
+		} else {
+			rightSelected = [];
+			rightSelected.push(n);
+		}
+	
+		updateListHighlights();
+		updateButtons();
 	});
 }
 
 function updateButtons() {
-	if( leftItems.length > 0 ) {
+	if( leftItems.length > 0 && leftSelected.length > 0 ) {
 		$("#moveRight, #allRight").prop('disabled',false);
 	} else {
 		$("#moveRight, #allRight").prop('disabled',true);
 	}
 
-	if( rightItems.length > 0 ) {
+	if( rightItems.length > 0 && rightSelected.length > 0 ) {
 		$("#moveLeft, #allLeft").prop('disabled',false);
 	} else {
 		$("#moveLeft, #allLeft").prop('disabled',true);
@@ -127,8 +135,9 @@ function initList() {
 				e.preventDefault();
 			}
 		});
-		listListeners();
-		updateButtons();
+	listListeners();
+	updateButtons();
+	updateListHighlights();
 }
 
 function buttonListeners() {
@@ -137,9 +146,26 @@ function buttonListeners() {
 			leftItems.push(rightItems[rightSelected[i]]);
 			rightItems.splice(rightSelected[i],1);
 		}
+		rightSelected = [];
+		var temp = [];
+		for( var i in leftSelected ) {
+			temp.push( leftItems[leftSelected[i]] );
+		}
+		
 		leftItems.sort(function(a,b) { 
 			return a.toLowerCase() > b.toLowerCase() 
 		});
+		
+		leftSelected = [];
+		
+		for( var i in leftItems ) {
+			for( var j in temp ) {
+				if( leftItems[i] === temp[j] ) {
+					leftSelected.push(i);
+					break;
+				}
+			}
+		}
 		initList();
 	});
 
@@ -148,10 +174,27 @@ function buttonListeners() {
 			rightItems.push(leftItems[leftSelected[i]]);
 			leftItems.splice(leftSelected[i],1);
 		}
+		leftSelected = [];
+		
+		var temp = [];
+		for( var i in rightSelected ) {
+			temp.push( rightItems[rightSelected[i]] );
+		}
+		
 		rightItems.sort(function(a,b) { 
 			return a.toLowerCase() > b.toLowerCase() 
 		});
-		initList();
+		
+		rightSelected = [];
+		
+		for( var i in rightItems ) {
+			for( var j in temp ) {
+				if( rightItems[i] === temp[j] ) {
+					rightSelected.push(i);
+					break;
+				}
+			}
+		}initList();
 	});
 
 	$("#allLeft").click(function() {

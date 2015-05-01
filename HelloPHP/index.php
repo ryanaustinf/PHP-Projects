@@ -122,7 +122,24 @@
 				buttonListeners();
 				$("button[id$='Left'], button[id$='Right']").click(function() {
 					cookify();
-				});				
+				});		
+
+				var timer;
+
+				$("#activate").click(function() {
+					if( $(this).text() == 'Go' ) {
+						timer = setInterval(function() { 
+							var d = new Date();
+							$("#time").html(d);
+						});
+						$('#activate').text("Stop");
+					} else {
+						clearInterval(timer);
+						$("#activate").text("Go");
+					}
+				});
+
+				$("#activate").click();
 			});	
 		</script>
 	</head>
@@ -259,8 +276,12 @@
 			</div>
 			<div id="rightBox"></div>
 		</div>
-			
-		<h3 id="result"></h3>
+		
+		<div id="react">
+			<h3 id="result"></h3>
+			<h4 id="time"></h4>
+			<button id="activate">Go</button>
+		</div>
 		
 		<?php 
 			if( $_SERVER['REQUEST_METHOD'] == "POST" ) {
