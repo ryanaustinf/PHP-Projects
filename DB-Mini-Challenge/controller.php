@@ -19,6 +19,10 @@
 		public function expose() {
 			return get_object_vars($this);
 		}
+		
+		public function __toString() {
+			return json_encode($this->expose());
+		}
 	}
 	
 	class NoteBuilder {
@@ -207,26 +211,26 @@
 		case "first":
 			$note = getFirstTodo();
 			if( !$fromIndex ) {
-				echo json_encode($note->expose());
+				echo $note;
 			}
 			break;
 		case "add":
 			add($_GET['note']);
 			$note = getLastToDo();
-			echo json_encode($note->expose());
+			echo $note;
 			break;
 		case "done":
 			doneToDo($_GET['id']);
 			$note = getNextPendingToDo($_GET['id']);
-			echo json_encode($note->expose());
+			echo $note;
 			break;
 		case "prev":
 			$note = getPrevToDo($_GET['id']);
-			echo json_encode($note->expose());
+			echo $note;
 			break;
 		case "next":
 			$note = getNextToDo($_GET['id']);
-			echo json_encode($note->expose());
+			echo $note;
 			break;
 		default:
 	}
