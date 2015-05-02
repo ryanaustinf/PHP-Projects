@@ -248,6 +248,16 @@
 			$test2->var3 = new Test(7,8);
 			echo "<br/>";
 			echo "\n\n".$test."<br/>\n";
+			$test2 = array();
+			$test2[0] = $test;
+			for( $i = 1; $i < 10; $i++ ) {
+				$test2[$i] = new Test($i,$i);
+			}
+			$test3 = array();
+			foreach( $test2 as $var ) {
+				$test3[] = $var->expose();
+			}
+			echo json_encode($test3)."<br/>";
 		?>
 		<br />
 		
