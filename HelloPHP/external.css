@@ -1,4 +1,28 @@
 @CHARSET "ISO-8859-1";
+#flip {
+	height:200px;
+}
+
+#flipPic {
+	background-color:#ABCDEF;
+	border:none;
+	border-radius:100px;
+	color:#000;
+	font-weight:bold;
+	margin:4px;
+	padding:10px;
+	outline:none;
+	width:80px;
+}
+
+#flipPic:hover {
+	background-color:#9ABCDE;
+}
+
+#flipPic:active {
+	background-color:#89ABCD;
+}
+
 .highlight {
 	background-color:rgb(232,242,254);
 }

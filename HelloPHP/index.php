@@ -140,6 +140,16 @@
 				});
 
 				$("#activate").click();
+
+				$("#flipPic").mousedown(function() {
+					$("#flip").attr('src','Cartman.jpg');
+					$(this).text('Butters');
+				});
+
+				$("#flipPic").mouseup(function() {
+					$("#flip").attr('src','Butters.jpg');
+					$(this).text('Cartman');
+				});
 			});	
 		</script>
 	</head>
@@ -278,6 +288,10 @@
 		</div>
 		
 		<div id="react">
+			<div>
+				<img id="flip" src="Butters.jpg" /><br/>
+				<button id="flipPic">Cartman</button>
+			</div>
 			<h3 id="result"></h3>
 			<h4 id="time"></h4>
 			<button id="activate">Go</button>
