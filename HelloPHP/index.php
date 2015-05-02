@@ -141,9 +141,10 @@
 
 				$("#activate").click();
 
-				$("#flipPic").mousedown(function() {
+				$("#flipPic").mousedown(function(e) {
 					$("#flip").attr('src','Cartman.jpg');
 					$(this).text('Butters');
+					e.preventDefault();
 				});
 
 				$("#flipPic").mouseup(function() {

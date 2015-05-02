@@ -33,7 +33,6 @@ function updateListHighlights() {
 function listListeners() {
 	$("p[id^='left']").click(function() {
 		var n = $(this).attr('id').substring(4);
-		console.log(n);
 		if( shift && leftSelected.length > 0 ) {
 			var leftBegin = leftSelected[0];
 			var i = n < leftBegin ? n : leftBegin;
@@ -65,7 +64,6 @@ function listListeners() {
 	
 	$("p[id^='right']").click(function() {
 		var n = $(this).attr('id').substring(5);
-		console.log(n);
 		if( shift && rightSelected.length > 0 ) {
 			var rightBegin = rightSelected[0];
 			var i = n < rightBegin ? n : rightBegin;
@@ -97,14 +95,24 @@ function listListeners() {
 }
 
 function updateButtons() {
-	if( leftItems.length > 0 && leftSelected.length > 0 ) {
-		$("#moveRight, #allRight").prop('disabled',false);
+	if( leftItems.length > 0 ) {
+		$("#allRight").prop('disabled',false);
+		if( leftSelected.length > 0 ) {
+			$("#moveRight").prop('disabled',false);
+		} else {
+			$("#moveRight").prop('disabled',true);
+		}
 	} else {
 		$("#moveRight, #allRight").prop('disabled',true);
 	}
 
-	if( rightItems.length > 0 && rightSelected.length > 0 ) {
-		$("#moveLeft, #allLeft").prop('disabled',false);
+	if( rightItems.length > 0 ) {
+		$("#allLeft").prop('disabled',false);
+		if( rightSelected.length > 0 ) {
+			$("#moveLeft").prop('disabled',false);
+		} else {
+			$("#moveLeft").prop('disabled',true);
+		}
 	} else {
 		$("#moveLeft, #allLeft").prop('disabled',true);
 	}		
@@ -194,7 +202,8 @@ function buttonListeners() {
 					break;
 				}
 			}
-		}initList();
+		}
+		initList();
 	});
 
 	$("#allLeft").click(function() {
@@ -205,7 +214,6 @@ function buttonListeners() {
 		leftItems.sort(function(a,b) { 
 			return a.toLowerCase() > b.toLowerCase() 
 		});
-		console.log( leftItems + "\n" + rightItems );
 		initList();
 	});
 
@@ -217,7 +225,6 @@ function buttonListeners() {
 		rightItems.sort(function(a,b) { 
 			return a.toLowerCase() > b.toLowerCase() 
 		});
-		console.log( leftItems + "\n" + rightItems );
 		initList();
 	});
 }
