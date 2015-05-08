@@ -1,4 +1,9 @@
 @CHARSET "ISO-8859-1";
+#mainContent {
+	height:500px;
+	overflow-y:scroll;
+}
+
 #flip {
 	height:200px;
 }
@@ -20,6 +25,11 @@
 
 #flipPic:active {
 	background-color:#89ABCD;
+}
+
+#listBox {
+	height:222px;
+	margin-bottom:10px;
 }
 
 .highlight {
@@ -58,6 +68,5 @@ p[id^="left"], p[id^="right"] {
 }
 
 #react {
-	position:relative;
-	top:-300px;
+	margin-bottom:10px;
 }
