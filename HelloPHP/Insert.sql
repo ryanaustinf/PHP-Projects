@@ -1,0 +1,1 @@
+INSERT INTO test(text) VALUES ('yo');

@@ -1,0 +1,3 @@
+SET SQL_SAFE_UPDATES = 0;
+UPDATE test SET status = TRUE WHERE id = id;
+SET SQL_SAFE_UPDATES = 1;

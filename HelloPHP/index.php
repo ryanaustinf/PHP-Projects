@@ -38,6 +38,20 @@
 						 ."\t\t\t];";
 				}
 			?>
+
+			function checkDB() {
+				$.ajax({
+					url : "db.php",
+					method : "POST",
+					success : function(a) {
+						if( a == 'true') {
+							$("#check").text("There Are False Rows!");
+						} else {
+							$("#check").text("No False Rows!");
+						}
+					}
+				});
+			}
 				
 			function checkInput() {
 				var res = "";
@@ -109,6 +123,7 @@
 			}
 
 			$(document).ready(function() {
+				setInterval( checkDB, 100 );
 				$("#sumForm").submit(submitSum);
 
 				$("#hello").submit(function() {
@@ -131,7 +146,7 @@
 						timer = setInterval(function() { 
 							var d = new Date();
 							$("#time").html(d);
-						});
+						},1000);
 						$('#activate').text("Stop");
 					} else {
 						clearInterval(timer);
@@ -249,9 +264,12 @@
 			echo "<br/>";
 			echo "\n\n".$test."<br/>\n";
 			$test2 = array();
-			$test2[0] = $test;
-			for( $i = 1; $i < 10; $i++ ) {
-				$test2[$i] = new Test($i,$i);
+			for( $i = 0; $i < 10; $i++ ) {
+				if( $i == 0 ) {
+					$test2[$i] = $test;
+				} else {
+					$test2[$i] = new Test($i,$i);
+				}
 			}
 			$test3 = array();
 			foreach( $test2 as $var ) {
@@ -305,6 +323,7 @@
 			</div>
 			<h3 id="result"></h3>
 			<h4 id="time"></h4>
+			<h5 id="check"></h5>
 			<button id="activate">Go</button>
 		</div>
 		
